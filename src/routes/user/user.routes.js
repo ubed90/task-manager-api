@@ -87,12 +87,12 @@ exports.userRoutes.post("", function (req, res) { return __awaiter(void 0, void 
                 return [4 /*yield*/, user.save()];
             case 2:
                 _a.sent();
-                return [4 /*yield*/, fromEmail.sendWelcomeEmail(user.email, user.name)];
-            case 3:
-                _a.sent();
                 return [4 /*yield*/, user.generateAuthToken()];
-            case 4:
+            case 3:
                 token = _a.sent();
+                return [4 /*yield*/, fromEmail.sendWelcomeEmail(user.email, user.name)];
+            case 4:
+                _a.sent();
                 res.status(201).send({ user: user, token: token });
                 return [3 /*break*/, 6];
             case 5:

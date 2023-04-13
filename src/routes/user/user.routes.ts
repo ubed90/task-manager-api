@@ -23,8 +23,8 @@ userRoutes.post("", async (req: Request, res: Response) => {
 
   try {
     await user.save();
-    await fromEmail.sendWelcomeEmail(user.email, user.name);
     const token = await user.generateAuthToken();
+    await fromEmail.sendWelcomeEmail(user.email, user.name);
     res.status(201).send({ user, token });
   } catch (error) {
     res.status(400).send(error);
