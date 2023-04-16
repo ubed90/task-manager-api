@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var express_1 = require("express");
-var task_routes_1 = require("./task/task.routes");
-var user_routes_1 = require("./user/user.routes");
+const express_1 = require("express");
+const task_routes_1 = require("./task/task.routes");
+const user_routes_1 = require("./user/user.routes");
 // export * from './user.routes';
 // export * from './task.routes';
-var mainRouter = (0, express_1.Router)();
+let mainRouter = (0, express_1.Router)();
 mainRouter.use('/users', user_routes_1.userRoutes);
 mainRouter.use('/tasks', task_routes_1.taskRoutes);
 exports.default = mainRouter;

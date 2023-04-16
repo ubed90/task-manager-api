@@ -1,14 +1,4 @@
-import express, { Express, NextFunction, Request, Response } from "express";
-import { establishConnection } from "./db/mongoose";
-
-import mainRouter from './routes';
-
-establishConnection();
-
-const app: Express = express();
-
-const port = process.env.PORT;
-
+import mainApp from "./app";
 
 // app.use((req: Request, res: Response, next: NextFunction) => {
 //     if(req.method === 'GET') {
@@ -19,10 +9,8 @@ const port = process.env.PORT;
 
 // });
 
+const port = process.env.PORT;
 
-app.use(express.json());
-app.use('/api', mainRouter)
-
-app.listen(port, () => {
+mainApp.listen(port, () => {
     console.log("Server is up on port ", port);
 })

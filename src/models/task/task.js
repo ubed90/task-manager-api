@@ -24,7 +24,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Task = exports.taskSchema = void 0;
-var fromMongoose = __importStar(require("mongoose"));
+const fromMongoose = __importStar(require("mongoose"));
 ;
 exports.taskSchema = new fromMongoose.Schema({
     description: {

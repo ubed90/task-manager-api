@@ -45,34 +45,180 @@ exports.sendCancellationEmail = exports.sendWelcomeEmail = void 0;
 //     })
 // }
 // Latest With SendInBlue
-var sibMail = __importStar(require("sib-api-v3-typescript"));
+const sibMail = __importStar(require("sib-api-v3-typescript"));
 // const sendInBlueApiKey = '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';
-var sibEmailInstance = new sibMail.TransactionalEmailsApi();
+const sibEmailInstance = new sibMail.TransactionalEmailsApi();
 // Configure Api Key
 sibEmailInstance.setApiKey(sibMail.TransactionalEmailsApiApiKeys.apiKey, process.env.SENDINBLUE_API_KEY);
 // Admin Sender
-var sender = {
+const sender = {
     email: "shaikhobaid123@gmail.com",
     name: "Ubed Shaikh",
 };
 // sibEmailInstance.sendTransacEmail(sibMail.SendSmtpEmail)
-var sendWelcomeEmail = function (email, name) {
+const sendWelcomeEmail = (email, name) => {
     return sibEmailInstance.sendTransacEmail({
-        sender: sender,
-        to: [{ email: email }],
+        sender,
+        to: [{ email }],
         subject: "Thanks for joining in!",
-        textContent: "Welcome ".concat(name.toUpperCase(), "! Go legend in a month with our AI Task Tracking service."),
-        htmlContent: "\n        <!DOCTYPE html>\n<html>\n<head>\n\t<meta charset=\"UTF-8\">\n\t<title>Transaction Notification</title>\n\t<style>\n\t\tbody {\n\t\t\tfont-family: Arial, sans-serif;\n\t\t\tbackground-color: #f6f6f6;\n\t\t\tcolor: #444444;\n\t\t\tline-height: 1.6em;\n\t\t\tpadding: 20px;\n\t\t\tmargin: 0;\n\t\t}\n\n\t\t.container {\n\t\t\tmax-width: 600px;\n\t\t\tmargin: 0 auto;\n\t\t\tbackground-color: #ffffff;\n\t\t\tpadding: 20px;\n\t\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t\t\tborder-radius: 5px;\n\t\t}\n\n\t\th1 {\n\t\t\tfont-size: 24px;\n\t\t\tmargin-top: 0;\n\t\t\ttext-align: center;\n\t\t}\n\n\t\tp {\n\t\t\tmargin-bottom: 20px;\n\t\t}\n\n\t\t.button {\n\t\t\tdisplay: inline-block;\n\t\t\tbackground-color: #4CAF50;\n\t\t\tcolor: #ffffff;\n\t\t\ttext-align: center;\n\t\t\tpadding: 10px 20px;\n\t\t\ttext-decoration: none;\n\t\t\tborder-radius: 5px;\n\t\t}\n\n\t\t.button:hover {\n\t\t\tbackground-color: #3e8e41;\n\t\t}\n\n\t\t.footer {\n\t\t\tfont-size: 12px;\n\t\t\tcolor: #999999;\n\t\t\ttext-align: center;\n\t\t\tmargin-top: 50px;\n\t\t\tpadding-top: 20px;\n\t\t\tborder-top: 1px solid #cccccc;\n\t\t}\n\t</style>\n</head>\n<body>\n\t<div class=\"container\">\n\t\t<h1>Account Created Successfully!</h1>\n\t\t<p>Hello <strong>".concat(name.toUpperCase(), "</strong>,</p>\n\t\t\t<p>Thank you for choosing Taskify. Go legend in a month with our AI Task Tracking service.</p>\n\t\t\t<p>If you have any questions or concerns, please don't hesitate to contact us.</p>\n\t\t\t<a href=\"https://ubedshaikh.netlify.app/home\" class=\"button\">Visit developer's website</a>\n\t\t</div>\n\t\t<div class=\"footer\">\n\t\t\t<p>This email was sent to ").concat(email.toLowerCase(), " because you made a transaction with us.</p>\n\t\t</div>\n\t</div>\n</body>\n</html>\n        "),
+        textContent: `Welcome ${name.toUpperCase()}! Go legend in a month with our AI Task Tracking service.`,
+        htmlContent: `
+        <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Transaction Notification</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f6f6f6;
+			color: #444444;
+			line-height: 1.6em;
+			padding: 20px;
+			margin: 0;
+		}
+
+		.container {
+			max-width: 600px;
+			margin: 0 auto;
+			background-color: #ffffff;
+			padding: 20px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			border-radius: 5px;
+		}
+
+		h1 {
+			font-size: 24px;
+			margin-top: 0;
+			text-align: center;
+		}
+
+		p {
+			margin-bottom: 20px;
+		}
+
+		.button {
+			display: inline-block;
+			background-color: #4CAF50;
+			color: #ffffff;
+			text-align: center;
+			padding: 10px 20px;
+			text-decoration: none;
+			border-radius: 5px;
+		}
+
+		.button:hover {
+			background-color: #3e8e41;
+		}
+
+		.footer {
+			font-size: 12px;
+			color: #999999;
+			text-align: center;
+			margin-top: 50px;
+			padding-top: 20px;
+			border-top: 1px solid #cccccc;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Account Created Successfully!</h1>
+		<p>Hello <strong>${name.toUpperCase()}</strong>,</p>
+			<p>Thank you for choosing Taskify. Go legend in a month with our AI Task Tracking service.</p>
+			<p>If you have any questions or concerns, please don't hesitate to contact us.</p>
+			<a href="https://ubedshaikh.netlify.app/home" class="button">Visit developer's website</a>
+		</div>
+		<div class="footer">
+			<p>This email was sent to ${email.toLowerCase()} because you made a transaction with us.</p>
+		</div>
+	</div>
+</body>
+</html>
+        `,
     });
 };
 exports.sendWelcomeEmail = sendWelcomeEmail;
-var sendCancellationEmail = function (email, name) {
+const sendCancellationEmail = (email, name) => {
     return sibEmailInstance.sendTransacEmail({
-        sender: sender,
-        to: [{ email: email }],
+        sender,
+        to: [{ email }],
         subject: "Sorry to see you go :)",
-        textContent: "GoodBye ".concat(name.toUpperCase(), "! I Hope to see you back sometime soon."),
-        htmlContent: "\n        <!DOCTYPE html>\n<html>\n<head>\n\t<meta charset=\"UTF-8\">\n\t<title>Transaction Notification</title>\n\t<style>\n\t\tbody {\n\t\t\tfont-family: Arial, sans-serif;\n\t\t\tbackground-color: #f6f6f6;\n\t\t\tcolor: #444444;\n\t\t\tline-height: 1.6em;\n\t\t\tpadding: 20px;\n\t\t\tmargin: 0;\n\t\t}\n\n\t\t.container {\n\t\t\tmax-width: 600px;\n\t\t\tmargin: 0 auto;\n\t\t\tbackground-color: #ffffff;\n\t\t\tpadding: 20px;\n\t\t\tbox-shadow: 0 0 10px rgba(0, 0, 0, 0.1);\n\t\t\tborder-radius: 5px;\n\t\t}\n\n\t\th1 {\n\t\t\tfont-size: 24px;\n\t\t\tmargin-top: 0;\n\t\t\ttext-align: center;\n\t\t}\n\n\t\tp {\n\t\t\tmargin-bottom: 20px;\n\t\t}\n\n\t\t.button {\n\t\t\tdisplay: inline-block;\n\t\t\tbackground-color: #4CAF50;\n\t\t\tcolor: #ffffff;\n\t\t\ttext-align: center;\n\t\t\tpadding: 10px 20px;\n\t\t\ttext-decoration: none;\n\t\t\tborder-radius: 5px;\n\t\t}\n\n\t\t.button:hover {\n\t\t\tbackground-color: #3e8e41;\n\t\t}\n\n\t\t.footer {\n\t\t\tfont-size: 12px;\n\t\t\tcolor: #999999;\n\t\t\ttext-align: center;\n\t\t\tmargin-top: 50px;\n\t\t\tpadding-top: 20px;\n\t\t\tborder-top: 1px solid #cccccc;\n\t\t}\n\t</style>\n</head>\n<body>\n\t<div class=\"container\">\n\t\t<h1>Account Deleted Successfully</h1>\n\t\t<p>GoodBye <strong>".concat(name.toUpperCase(), "</strong>,</p>\n\t\t\t<p>I Hope to see you back sometime soon.</p>\n\t\t\t<p>If you have any questions or concerns, please don't hesitate to contact us.</p>\n\t\t\t<a href=\"https://ubedshaikh.netlify.app/home\" class=\"button\">Visit developer's website</a>\n\t\t</div>\n\t\t<div class=\"footer\">\n\t\t\t<p>This email was sent to ").concat(email.toLowerCase(), " because you made a transaction with us.</p>\n\t\t</div>\n\t</div>\n</body>\n</html>\n        "),
+        textContent: `GoodBye ${name.toUpperCase()}! I Hope to see you back sometime soon.`,
+        htmlContent: `
+        <!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Transaction Notification</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f6f6f6;
+			color: #444444;
+			line-height: 1.6em;
+			padding: 20px;
+			margin: 0;
+		}
+
+		.container {
+			max-width: 600px;
+			margin: 0 auto;
+			background-color: #ffffff;
+			padding: 20px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			border-radius: 5px;
+		}
+
+		h1 {
+			font-size: 24px;
+			margin-top: 0;
+			text-align: center;
+		}
+
+		p {
+			margin-bottom: 20px;
+		}
+
+		.button {
+			display: inline-block;
+			background-color: #4CAF50;
+			color: #ffffff;
+			text-align: center;
+			padding: 10px 20px;
+			text-decoration: none;
+			border-radius: 5px;
+		}
+
+		.button:hover {
+			background-color: #3e8e41;
+		}
+
+		.footer {
+			font-size: 12px;
+			color: #999999;
+			text-align: center;
+			margin-top: 50px;
+			padding-top: 20px;
+			border-top: 1px solid #cccccc;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Account Deleted Successfully</h1>
+		<p>GoodBye <strong>${name.toUpperCase()}</strong>,</p>
+			<p>I Hope to see you back sometime soon.</p>
+			<p>If you have any questions or concerns, please don't hesitate to contact us.</p>
+			<a href="https://ubedshaikh.netlify.app/home" class="button">Visit developer's website</a>
+		</div>
+		<div class="footer">
+			<p>This email was sent to ${email.toLowerCase()} because you made a transaction with us.</p>
+		</div>
+	</div>
+</body>
+</html>
+        `,
     });
 };
 exports.sendCancellationEmail = sendCancellationEmail;

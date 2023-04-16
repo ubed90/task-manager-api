@@ -258,6 +258,6 @@ userRoutes.delete("/profile", fromMiddleware.auth, async (req: Request, res: Res
 
     res.status(200).send(user);
   } catch (error) {
-    res.status(500);
+    res.status(500).send();
   }
 });
